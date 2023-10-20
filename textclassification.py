@@ -57,21 +57,21 @@ from torch.utils.data import DataLoader, TensorDataset
 # Load pre-trained BERT model
 model_name = "bert-base-uncased"
 tokenizer = BertTokenizer.from_pretrained(model_name)
-model = BertForSequenceClassification.from_pretrained(model_name, num_labels=num_classes)  # Specify num_classes
+model = BertForSequenceClassification.from_pretrained(model_name, num_labels=7) 
 
-# Load your dataset from a CSV file
+# Load dataset from a CSV file
 df = pd.read_csv(dataset.csv)
 
-# Extract the relevant columns from your dataset
-train_data = df["Heading"].tolist()  # Replace "Heading" with your actual column name
-test_data = df["Article.Description"].tolist()  # Replace "Article.Description" with your actual column name
-labels = df["Article_Type"].tolist()  # Assuming you have a column named "Article_Type"
+# Extract the relevant columns from dataset
+train_data = df["Heading"].tolist()  
+test_data = df["Article.Description"].tolist()  
+labels = df["Article_Type"].tolist()  
 
 # Use label encoding to convert string labels to numerical values
 label_encoder = LabelEncoder()
 labels = label_encoder.fit_transform(labels)
 
-# Tokenize your data
+# Tokenize data
 train_encodings = tokenizer(train_data, truncation=True, padding=True)
 test_encodings = tokenizer(test_data, truncation=True, padding=True)
 
